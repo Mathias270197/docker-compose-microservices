@@ -1,0 +1,59 @@
+services:
+ mongo:
+  image: mongo:latest
+  ports:
+    - 27017:27017
+  volumes:
+    - mongodb_data_container:/data/db
+    
+ mysql:
+  image: mysql:latest
+  ports:
+    - 3306:3306
+  volumes:
+    - mysql_data_container:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+ figureReview-service:
+  depends_on:
+    - mongo
+  image: StijnDePreter/figureReview-service
+  ports:
+    - 8052:8052
+  links:
+    - mongo
+  environment:
+   MONGODB_PORT: 27017
+   MONGODB_HOST: mongo
+   
+ steps-service:
+  depends_on:
+    - mysql
+  image: Mathias270197/steps-service
+  ports:
+    - 8051:8051
+  links:
+    - mysql
+  environment:
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql
+
+ edge-service:
+  depends_on:
+    - steps-service
+    - figureReview-service
+  image: Mathias270197/edge-service
+  ports:
+    - 8050:8050
+  links:
+    - steps-service
+    - figureReview-service
+  environment:
+   FIGURE_REVIEW_SERVICE_BASEURL: figureReview-service:8052
+   STEPS_SERVICE_BASEURL: steps-service:8051
+
+volumes:
+ mongodb_data_container:
+ mysql_data_container:
