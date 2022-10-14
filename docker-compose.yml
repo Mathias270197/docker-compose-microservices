@@ -9,7 +9,7 @@ services:
  mysql:
   image: mysql:latest
   ports:
-    - 3306:3306
+    - 3307:3306
   volumes:
     - mysql_data_container:/var/lib/mysql
   environment:
@@ -18,7 +18,7 @@ services:
  figureReview-service:
   depends_on:
     - mongo
-  image: StijnDePreter/figureReview-service
+  image: Mathias270197/figurereview-service
   ports:
     - 8052:8052
   links:
@@ -43,13 +43,13 @@ services:
  edge-service:
   depends_on:
     - steps-service
-    - figureReview-service
+    - figurereview-service
   image: Mathias270197/edge-service
   ports:
     - 8050:8050
   links:
     - steps-service
-    - figureReview-service
+    - figurereview-service
   environment:
    FIGURE_REVIEW_SERVICE_BASEURL: figureReview-service:8052
    STEPS_SERVICE_BASEURL: steps-service:8051
