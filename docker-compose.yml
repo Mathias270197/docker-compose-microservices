@@ -15,7 +15,7 @@ services:
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- figureReview-service:
+ figurereview-service:
   depends_on:
     - mongo
   image: Mathias270197/figurereview-service
