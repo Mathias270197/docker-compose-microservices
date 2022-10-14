@@ -44,7 +44,7 @@ services:
   depends_on:
     - steps-service
     - figurereview-service
-  image: Mathias270197/edge-service
+  image: r0618721/edge-service
   ports:
     - 8050:8050
   links:
