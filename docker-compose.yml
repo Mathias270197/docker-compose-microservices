@@ -18,7 +18,7 @@ services:
  figurereview-service:
   depends_on:
     - mongo
-  image: mathias270197/figurereview-service
+  image: r0618721/figurereview-service
   ports:
     - 8052:8052
   links:
@@ -30,7 +30,7 @@ services:
  steps-service:
   depends_on:
     - mysql
-  image: mathias270197/steps-service
+  image: r0618721/steps-service
   ports:
     - 8051:8051
   links:
