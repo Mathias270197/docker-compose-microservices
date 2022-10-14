@@ -52,7 +52,7 @@ services:
     - figurereview-service
   environment:
    FIGURE_REVIEW_SERVICE_BASEURL: figureReview-service:8052
-   STEPS_SERVICE_BASEURL: steps-service:8051
+   STEP_SERVICE_BASEURL: steps-service:8051
 
 volumes:
  mongodb_data_container:
